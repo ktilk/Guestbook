@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuestbookASPNET", "GuestbookASPNET\GuestbookASPNET.csproj", "{C30CC4D4-05FF-4D4C-A0BC-70120509FD99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{607D41AC-341A-46EF-881E-00A2C3BEE019}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{ECBB77B7-39FD-4F25-8464-2042358E8702}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C30CC4D4-05FF-4D4C-A0BC-70120509FD99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C30CC4D4-05FF-4D4C-A0BC-70120509FD99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C30CC4D4-05FF-4D4C-A0BC-70120509FD99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C30CC4D4-05FF-4D4C-A0BC-70120509FD99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{607D41AC-341A-46EF-881E-00A2C3BEE019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{607D41AC-341A-46EF-881E-00A2C3BEE019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{607D41AC-341A-46EF-881E-00A2C3BEE019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{607D41AC-341A-46EF-881E-00A2C3BEE019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECBB77B7-39FD-4F25-8464-2042358E8702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECBB77B7-39FD-4F25-8464-2042358E8702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECBB77B7-39FD-4F25-8464-2042358E8702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECBB77B7-39FD-4F25-8464-2042358E8702}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
