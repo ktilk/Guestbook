@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DAL;
 using Domain;
+using GuestbookASPNET.ViewModels;
 
 namespace GuestbookASPNET.Controllers
 {
@@ -16,9 +17,10 @@ namespace GuestbookASPNET.Controllers
         private DataBaseContext db = new DataBaseContext();
 
         // GET: Inscriptions
-        public ActionResult Index()
+        public ActionResult Index(InscriptionViewModel vm)
         {
-            return View(db.Inscriptions.ToList());
+            vm.Inscriptions = db.Inscriptions.ToList();
+            return View(vm);
         }
 
         // GET: Inscriptions/Details/5
@@ -47,13 +49,14 @@ namespace GuestbookASPNET.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,WriterName,Content,DateAdded,DateModified,DateDeleted")] Inscription inscription)
+        public ActionResult Create(Inscription inscription)
         {
             if (ModelState.IsValid)
             {
+                inscription.DateAdded = DateTime.Now;
                 db.Inscriptions.Add(inscription);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
 
             return View(inscription);
