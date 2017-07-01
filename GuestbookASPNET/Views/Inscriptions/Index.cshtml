@@ -20,12 +20,15 @@
                 <div id="date-added" class="col-md-4">
                     @Html.DisplayFor(modelItem => item.DateAdded)
                 </div>
+                <div id="date-modified">
+                    @if (item.DateModified != null)
+                    {
+                        @Html.HiddenFor(modelItem => item.DateModified)
+                    }
+                </div>
             </div>
             <div id="content">
                 @Html.DisplayFor(modelItem => item.Content)
-            </div>
-            <div id="date-modified">
-                @Html.HiddenFor(modelItem => item.DateModified)
             </div>
             <div id="date-deleted">
                 @Html.HiddenFor(modelItem => item.DateDeleted)

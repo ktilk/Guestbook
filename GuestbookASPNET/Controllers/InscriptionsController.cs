@@ -19,7 +19,7 @@ namespace GuestbookASPNET.Controllers
         // GET: Inscriptions
         public ActionResult Index(InscriptionViewModel vm)
         {
-            vm.Inscriptions = db.Inscriptions.ToList();
+            vm.Inscriptions = db.Inscriptions.Where(i => i.DateDeleted == null).ToList();
             return View(vm);
         }
 
@@ -30,7 +30,7 @@ namespace GuestbookASPNET.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inscription inscription = db.Inscriptions.Find(id);
+            var inscription = db.Inscriptions.Find(id);
             if (inscription == null)
             {
                 return HttpNotFound();
@@ -41,7 +41,8 @@ namespace GuestbookASPNET.Controllers
         // GET: Inscriptions/Create
         public ActionResult Create()
         {
-            return View();
+            var vm = new InscriptionViewModel();
+            return View(vm);
         }
 
         // POST: Inscriptions/Create
@@ -49,17 +50,17 @@ namespace GuestbookASPNET.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Inscription inscription)
+        public ActionResult Create(InscriptionViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                inscription.DateAdded = DateTime.Now;
-                db.Inscriptions.Add(inscription);
+                vm.Inscription.DateAdded = DateTime.Now;
+                db.Inscriptions.Add(vm.Inscription);
                 db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(inscription);
+            return View(vm);
         }
 
         // GET: Inscriptions/Edit/5
@@ -69,12 +70,12 @@ namespace GuestbookASPNET.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inscription inscription = db.Inscriptions.Find(id);
-            if (inscription == null)
+            var vm = new InscriptionViewModel {Inscription = db.Inscriptions.Find(id)};
+            if (vm.Inscription == null)
             {
                 return HttpNotFound();
             }
-            return View(inscription);
+            return View(vm);
         }
 
         // POST: Inscriptions/Edit/5
@@ -82,15 +83,16 @@ namespace GuestbookASPNET.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,WriterName,Content,DateAdded,DateModified,DateDeleted")] Inscription inscription)
+        public ActionResult Edit(InscriptionViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(inscription).State = EntityState.Modified;
+                db.Entry(vm.Inscription).State = EntityState.Modified;
+                vm.Inscription.DateModified = DateTime.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(inscription);
+            return View(vm);
         }
 
         // GET: Inscriptions/Delete/5
@@ -114,7 +116,7 @@ namespace GuestbookASPNET.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Inscription inscription = db.Inscriptions.Find(id);
-            db.Inscriptions.Remove(inscription);
+            inscription.DateDeleted = DateTime.Now;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

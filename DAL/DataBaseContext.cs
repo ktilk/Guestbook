@@ -17,5 +17,15 @@ namespace DAL
         }
 
         public DbSet<Inscription> Inscriptions { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // convert all datetime and datetime? properties to datetime2 in ms sql
+            // ms sql datetime has min value of 1753-01-01 00:00:00.000
+            modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2").HasPrecision(0));
+
+
+
+        }
     }
 }
