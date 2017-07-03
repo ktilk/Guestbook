@@ -20,6 +20,8 @@ namespace GuestbookASPNET.Controllers
         public ActionResult Index(InscriptionViewModel vm)
         {
             vm.Inscriptions = db.Inscriptions.Where(i => i.DateDeleted == null).ToList();
+            var groups = db.Inscriptions.AsEnumerable().GroupBy(i => i.DateAdded.ToString("M"));
+            vm.DateSelectList = new SelectList(groups.Select(g => g.Key));
             return View(vm);
         }
 

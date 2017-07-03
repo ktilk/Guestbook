@@ -9,21 +9,32 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<div class="form-group">
+    @Html.LabelFor(model => model.Inscription.DateAdded, "Date added", new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(model => model.Inscription.DateAdded, Model.DateSelectList, "-- Select --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.Inscription.DateAdded, "", new { @class = "text-danger" })
+    </div>
+</div>
+
 <div id="inscription-list">
     @foreach (var item in Model.Inscriptions)
     {
         <div id="inscription">
             <div class="row">
-                <div id="writer-name" class="col-md-4">
+                <div id="writer-name">
+                    @Html.LabelFor(modelItem => item.WriterName, "Writer:", new { @class = "control-label col-md-1" })
                     @Html.DisplayFor(modelItem => item.WriterName)
                 </div>
-                <div id="date-added" class="col-md-4">
+                <div id="date-added">
+                    @Html.LabelFor(modelItem => item.DateAdded, "Posted:", new { @class = "control-label col-md-1" })
                     @Html.DisplayFor(modelItem => item.DateAdded)
                 </div>
                 <div id="date-modified">
                     @if (item.DateModified != null)
                     {
-                        @Html.HiddenFor(modelItem => item.DateModified)
+                        @Html.LabelFor(modelItem => item.DateModified, "Modified:", new { @class = "control-label col-md-1" })
+                        @Html.DisplayFor(modelItem => item.DateModified)
                     }
                 </div>
             </div>
